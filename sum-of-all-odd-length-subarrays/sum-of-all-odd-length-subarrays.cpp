@@ -1,5 +1,6 @@
 class Solution {
 public:
+  // Refer To This For Explaination https://www.geeksforgeeks.org/count-of-contiguous-subarrays-possible-for-every-index-by-including-the-element-at-that-index/
     int sumOddLengthSubarrays(vector<int>& arr) {
       int currSum=0;
       for(int i=0;i<arr.size();i++){ 
