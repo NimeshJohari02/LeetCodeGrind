@@ -1,10 +1,16 @@
 class Solution {
 public:
     bool isPowerOfTwo(int n) {
-        if(n==0){
+        // int n = abs(num);
+        if(n<=0){
             return false;
         }
-        return (floor(log2(n))==ceil(log2(n)));
-    
-    }
+        if(n==1){
+            return true;
+        }
+        if(n%2!=0){
+            return false;
+        }
+        return isPowerOfTwo(n/2);
+        }
 };
