@@ -9,9 +9,13 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+//Method 1 Using Lvel Order ;
+// Method 2 Using A Post Order Traversal With 2 Variables Keeping Track Of Currret Level and Max 
+
 class Solution {
 public:
-    vector<vector<int>>levelOrder;
+/*    vector<vector<int>>levelOrder;
     void getLevelOrder(TreeNode *root){
         queue<TreeNode *> q;
         q.push(root);
@@ -29,9 +33,24 @@ public:
             smallAns.clear();
         }
         return;
+    }*/
+    vector<int>ans;
+    int maxLevel=0;
+    void traversal(TreeNode *root , int currentLevel=1)
+    {
+        if(root == NULL){
+            return;
+        }
+        if(currentLevel>maxLevel){
+            ans.push_back(root->val);
+            maxLevel=currentLevel;
+        }
+        traversal(root->right,currentLevel+1);
+        traversal(root->left,currentLevel+1);
+        return ;
     }
-    vector<int> rightSideView(TreeNode* root) {
-        vector<int>ans;
+        vector<int> rightSideView(TreeNode* root) {
+  /*      vector<int>ans;
         if(root == NULL){
             return {};
         }
@@ -40,5 +59,11 @@ public:
             ans.push_back(it.back());
         }
         return ans ;
+    */
+            if(root==NULL){
+                return {};
+            }
+            traversal(root);
+            return ans;
     }
 };
