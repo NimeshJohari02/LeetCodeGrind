@@ -9,7 +9,7 @@
  */
 class Solution {
 public:
-    vector<TreeNode *> path1;
+    /*vector<TreeNode *> path1;
     vector<TreeNode *> path2;
     bool findPath(TreeNode *root , TreeNode *target,vector<TreeNode *>&path){
         if(root==NULL){
@@ -48,3 +48,28 @@ public:
         return path1[i-1];
     }
 };
+
+*/
+    TreeNode *helper(TreeNode *root , TreeNode *p , TreeNode *q ){
+        if(root == NULL){
+            return NULL;
+        }
+        if(root->val == p->val || root->val==q->val){
+            return root;
+        }
+        TreeNode *leftSide=helper(root->left , p , q);
+        TreeNode *rightSide=helper(root->right,p,q);
+        if(leftSide and rightSide){
+            return root;
+        }
+        if(leftSide){
+            return leftSide;
+        }
+        return rightSide;
+    }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        return helper(root,p,q);
+    }
+};
+
+
