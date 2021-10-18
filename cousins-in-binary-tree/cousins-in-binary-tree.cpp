@@ -13,7 +13,7 @@ typedef pair<TreeNode *,TreeNode *> np;
 //NODE,NODE.Parent ;
 class Solution {
 public:
-    bool isCousins(TreeNode* root, int x, int y) {
+    /*bool isCousins(TreeNode* root, int x, int y) {
         queue<np> q;
         vector<np>miniAns;
         q.push({root , root});
@@ -51,5 +51,18 @@ public:
             miniAns.clear();
         }
         return false;
+    }*/
+    //This approach from the discuss section is very simple 
+    // create helper which recursively . instead of using vertical lines as distance from the root we can use horizontal lines too .
+        bool isCousins(TreeNode* root, int x, int y) {
+		unordered_map<int, pair<int, int>> m;
+		helper(root, 0, -1, m);
+		return m[x].first == m[y].first && m[x].second != m[y].second;
+    }
+    void helper(TreeNode* node, int depth, int parent, unordered_map<int, pair<int, int>>& m) {
+    	if (!node) return;
+    	m[node->val] = {depth, parent};
+    	helper(node->left, depth + 1, node->val, m);
+    	helper(node->right, depth + 1, node->val, m);
     }
 };
