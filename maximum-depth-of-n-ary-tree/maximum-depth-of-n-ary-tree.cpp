@@ -17,23 +17,18 @@ public:
     }
 };
 */
-
+//Optimised Swap Vector By QP
 class Solution {
 public:
     int maxDepth(Node* root) {
         if(root == NULL){
             return 0;
         }
-        vector<int>childDepth;
-        for(int i =0 ; i<root->children.size();i++){
-            childDepth.push_back(maxDepth(root->children[i]));
+    priority_queue<int>pq;
+        pq.push(0);
+    for(int i =0 ; i<root->children.size();i++){
+            pq.push(maxDepth(root->children[i]));
         }
-        int currMax =0;
-        
-        for(auto it : childDepth){
-            cout<<it<<endl;
-            currMax = max(currMax , it);
-        }
-        return 1+currMax;
+        return 1+pq.top();
     }
 };
