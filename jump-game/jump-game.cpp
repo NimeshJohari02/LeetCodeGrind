@@ -1,7 +1,7 @@
 class Solution {
 public:
     // This is recursive approach will definitely give TLE . Now Memoizing this 
-    int arr[100000];
+   /* int arr[100000];
     bool helper(vector<int>&nums , int pos=0){
          if(pos == nums.size()-1){
              arr[pos]=1;
@@ -27,8 +27,18 @@ public:
         arr[pos]=0;
         return false;
     }
+    // Even After Memoization the Runtime is quite bad 
+    // Approach Optimised -> take a max reach element , This indicate to which position have you reached starting from i .
+    // At the end check if max Reach. In this greedy would also work that you are taking the maximum jump . If in the end you are 
+    // able to reach the maximum element then you can definitely take jumps from 1 -> max 
+    */
     bool canJump(vector<int>& nums) {
-        memset(arr,-1,sizeof(arr));
-        return helper(nums);
+        int i =0;
+        for( int maxReach=0; i <nums.size() &&  i <= maxReach ;i++){
+            maxReach = max(i+nums[i], maxReach);
+        }
+        return i == nums.size();
     }
+    
+    
 };
