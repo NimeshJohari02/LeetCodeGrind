@@ -11,23 +11,25 @@
  */
 class Solution {
 public:
-    int ans =0;
-    void solve(TreeNode *root, int midAns){
-        midAns = midAns*10+root->val;
-        if(root->left == NULL and root->right == NULL){
-            ans +=midAns ;
+    int helper(TreeNode *root , int cs){
+        if(root == NULL){
+            return 0;
         }
-        if(root->left != NULL){
-            solve(root->left , midAns);
+        cs = cs*10+root->val;
+        if(root ->left == NULL and root->right ==  NULL){
+            return cs;
         }
-        if(root->right != NULL){
-            solve(root->right , midAns);
+        int left =0;
+        int right =0;
+        if(root->left) {
+         left = helper(root->left , cs);
         }
-        return;
+        if(root ->right){
+            right = helper(root->right , cs);
+        }
+        return left + right ;
     }
-        int sumNumbers(TreeNode* root) {
-        solve(root,0);
-            return ans ;
+    int sumNumbers(TreeNode* root) {
+       return helper(root , 0 );
     }
-
 };
