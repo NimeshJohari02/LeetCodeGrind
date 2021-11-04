@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    vector<int>inOrder;
+ /*   vector<int>inOrder;
     void trav(TreeNode *root ){
         if(root == NULL){
             return ;
@@ -42,5 +42,20 @@ public:
         reconstruct(root);
         return root;
     }
+    Another Soln By Single Recursion No Extra Space
+    */
     
+    TreeNode* bstToGst(TreeNode* root) {
+        int cs = 0;
+        helper(root,cs);
+        return root;
+    }
+    
+    void helper(TreeNode* node, int& cs){
+        if (node == NULL)  return;
+        helper(node->right,cs);
+        node->val += cs;
+        cs = node->val;
+        helper(node->left, cs);
+    }
 };
