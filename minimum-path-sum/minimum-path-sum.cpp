@@ -23,3 +23,23 @@ public:
     return dp[row-1][col-1];
     }
 };
+
+
+
+// Another approach using only a single vector because we want to keep track of only prev row 
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<int> cur(m, grid[0][0]);
+        for (int i = 1; i < m; i++)
+            cur[i] = cur[i - 1] + grid[i][0]; 
+        for (int j = 1; j < n; j++) {
+            cur[0] += grid[0][j]; 
+            for (int i = 1; i < m; i++)
+                cur[i] = min(cur[i - 1], cur[i]) + grid[i][j];
+        }
+        return cur[m - 1];
+    }
+};
