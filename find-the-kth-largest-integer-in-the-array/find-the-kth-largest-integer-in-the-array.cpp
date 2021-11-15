@@ -1,22 +1,15 @@
 class Solution {
 public:
-    static bool cmp(string x , string y)
+  static bool cmp(string &a,string &b)
     {
-        if(x.length()==y.length()){
-            int i=0;
-            while(x[i]==y[i] and i<min(x.length(),y.length())){
-                i++;
-            }
-            return x[i]>y[i];
+        if(a.size()==b.size())
+        {
+            return a<b;
         }
-        return x.length()>y.length();
+        return a.size()<b.size();
     }
     string kthLargestNumber(vector<string>& nums, int k) {
-        sort(nums.begin(),nums.end(),cmp);
-        for(auto it:nums){
-            cout<<it<<"  ";
-       } 
-        cout<<endl;
-        return nums[k-1];
+         sort(nums.begin(),nums.end(),cmp);
+        return nums[nums.size()-k];
     }
 };
