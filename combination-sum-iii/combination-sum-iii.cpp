@@ -29,3 +29,36 @@ public:
         return ans;
     }
 };
+
+
+
+// Optimised Approach Using For Loop based Backtracking 
+
+
+class Solution {
+public:
+ vector<vector<int>> ans;
+vector<vector<int>> combinationSum3(int k, int n){
+    //k numbers sum to n
+    vector<int> subset;
+    helper(n, subset, 1, k);
+    return ans;
+}
+
+void helper(int target, vector<int> &subset, int begin, int count){
+    if  (target==0) {
+        ans.push_back(subset);
+        return;
+    }
+  
+    if (count==0)
+        return;
+    
+    for (int i=begin; i<10 && target>=i*count+count*(count-1)/2; i++) {
+        subset.push_back(i);
+        helper(target-i, subset, i+1, count-1); 
+        subset.pop_back();
+    }
+}
+
+};
