@@ -50,3 +50,38 @@ public:
         }
     }
 };
+
+
+
+
+Alternate Approach From Discuss Section Runtime 32 Seconds
+We Know that we have to delete node with key in a bst thus if root->val is > key go left else recursively delete from right half
+Then in else we check the 3 standard conditions whether 
+1.IsLeaf Node -> delete Directly and return NULL
+2.HasOneChild -> Return the only child that would be ok and retain BST property 
+3.HasBothChildren -> Replacing The Node by Inorder Successor Or Inorder Predecessor .
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(root == NULL)return NULL;
+        
+        if(key > root->val){
+            root->right = deleteNode(root->right,key);
+        }
+        else if(key < root->val){
+            root->left = deleteNode(root->left,key);
+        }
+        else{
+            if(!root->left && !root->right) return NULL; // note !root->left means that left is NULL!!!!
+            else if(!root->left && root->right) return root->right;
+            else if(!root->right && root->left) return root->left;
+            else {
+                TreeNode *after = root->left;
+                while(after && after->right) {after = after->right;} // InOrder Successor
+                after->right = root->right;
+                return root->left;
+            }
+        }
+        return root;
+    }
+};
+
