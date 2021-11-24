@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // My Approach O(min(m ,n)
     vector<vector<int>> intervalIntersection(vector<vector<int>>& firstList, vector<vector<int>>& secondList) {
         int i =0 ;
         int j =0;
@@ -30,3 +31,33 @@ public:
         return ans;
     }
 };
+
+
+
+// Another Appoarch Same Idea Cleaner Implimentation . 
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& A, vector<vector<int>>& B) {
+        vector<vector<int>> v;
+        int i=0,j=0;
+        while(i<A.size() && j<B.size()){
+            int l=max(A[i][0], B[j][0]);
+            int u=min(A[i][1], B[j][1]);
+            if(l<=u) v.push_back({l,u});
+            if(A[i][1] < B[j][1])   i++;
+            else j++;
+        }
+        return v;
+    }
+};
+
+// Approach II .
+  vector<vector<int>> res;
+    for (auto i = 0, j = 0; i < A.size() && j < B.size(); A[i][1] < B[j][1] ? ++i : ++j) {
+        auto start = max(A[i][0], B[j][0]);
+        auto end = min(A[i][1], B[j][1]);
+        if (start <= end) 
+            res.push_back({start, end});
+    }
+    return res;    
+}
