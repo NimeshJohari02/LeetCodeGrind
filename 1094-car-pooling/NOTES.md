@@ -1,0 +1,1 @@
+Keeping a map every time you board a station you add the number of passengers and subtract respectively when you get out . Then maintain an int to find cumulative sum
