@@ -11,30 +11,37 @@
  */
 class Solution {
 public:
-    int totalSum =0;
-    void helper(TreeNode *root , int currentNum =0 ){
-        if(root == NULL)
-        {
-            return ;
-        }
-        if(root->left == NULL && root->right == NULL) {
-        currentNum = currentNum << 1;
-        currentNum = currentNum | root->val;
-        totalSum += currentNum ;
-            return ;
-        }
-        currentNum = currentNum << 1;
-        currentNum = currentNum | root->val;
-        helper(root->left , currentNum);
-        helper(root->right , currentNum);
-        return;
-    }
-    int sumRootToLeaf(TreeNode* root ) {
+    // int totalSum =0;
+    // void helper(TreeNode *root , int currentNum =0 ){
+    //     if(root == NULL)
+    //     {
+    //         return ;
+    //     }
+    //     if(root->left == NULL && root->right == NULL) {
+    //     currentNum = currentNum << 1;
+    //     currentNum = currentNum | root->val;
+    //     totalSum += currentNum ;
+    //         return ;
+    //     }
+    //     currentNum = currentNum << 1;
+    //     currentNum = currentNum | root->val;
+    //     helper(root->left , currentNum);
+    //     helper(root->right , currentNum);
+    //     return;
+    // }
+    // int sumRootToLeaf(TreeNode* root ) {
+    //     if(root == NULL){
+    //         return 0;
+    //     }
+    //     int currentNum =0;
+    //     helper(root , currentNum);
+    //     return totalSum;
+    // }
+        int sumRootToLeaf(TreeNode* root , int val =0) {
         if(root == NULL){
             return 0;
         }
-        int currentNum =0;
-        helper(root , currentNum);
-        return totalSum;
-    }
+            val = 2*val+root->val;
+            return (root->left == root->right ? val :sumRootToLeaf(root->left , val)+ sumRootToLeaf(root->right, val) );
+        }
 };
