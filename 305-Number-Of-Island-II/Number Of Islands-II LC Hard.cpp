@@ -8,7 +8,8 @@ class DSU {
 
  public:
   DSU(int n) {
-    for (int i = 1; i <= n; i++) {
+   // Since we have to account for 0 based indexing start DSU by 0 otherwise vector offset error aata rhe ga 
+    for (int i = 0; i <= n; i++) {
       parent.push_back(i);
       size.push_back(1);
     }
@@ -57,7 +58,7 @@ vector<int> numIslandsII(vector<vector<int>>& positions, int m, int n) {
       int newx = x + dx[dir];
       int newy = y + dx[dir];
       int newidx = newx * m + (newy + 1);
-      if (dsu.findParent(idx) != dsu.findParent(newIdx)) {
+      if (newx>=0 && newy>=0 && newx<m && newy<n&& dsu.findParent(idx) != dsu.findParent(newIdx)) {
         cnt--;
         dsu.union(idx, newidx);
       }
