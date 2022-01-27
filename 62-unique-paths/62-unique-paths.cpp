@@ -3,7 +3,7 @@ class Solution {
   int uniquePaths(int m, int n) {
     // vector<vector<int>>dp(m , vector<int>(n , -1));
     // return uniquePathsMemoized(m-1, n-1, dp);
-    return uniquePathBottomUp(m, n);
+    return uniquePathBottomUpSpaceOptimized(m, n);
   }
   int recursion(int row, int cols) {
     if (row == 0 && cols == 0) return 1;
@@ -35,4 +35,20 @@ class Solution {
     }
     return dp[m - 1][n - 1];
   }
+    int uniquePathBottomUpSpaceOptimized(int m , int n ){
+    vector<int>prev(n , 0);
+    for(int i=0 ; i < m ; i++){
+        vector<int>currentRow(n , 0);
+        for(int j=0 ;j < n ; j++){
+            if(i==0 && j ==0 ) {currentRow[0]=1;continue;} 
+            int left =j-1 >=0 ? currentRow[j-1] : 0;
+            int up =  prev[j] ;
+            currentRow[j] = up + left;
+        }
+        prev = currentRow ;
+    }
+    return prev[n-1];
+}
+
+    
 };
