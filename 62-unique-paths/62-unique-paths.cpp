@@ -3,7 +3,8 @@ class Solution {
   int uniquePaths(int m, int n) {
     // vector<vector<int>>dp(m , vector<int>(n , -1));
     // return uniquePathsMemoized(m-1, n-1, dp);
-    return uniquePathBottomUpSpaceOptimized(m, n);
+    // return uniquePathBottomUpSpaceOptimized(m, n);
+    return permutationAndCombinationSolution(m , n);
   }
   int recursion(int row, int cols) {
     if (row == 0 && cols == 0) return 1;
@@ -49,6 +50,18 @@ class Solution {
     }
     return prev[n-1];
 }
-
+    int permutationAndCombinationSolution(int m , int n){
+        // We know that to move to the end we will have to take m-1 + n-1 steps  ie D | R
+        // ie m+n-2 total mooves;
+        //From those moves if we choose either m-1 or n-1 ways we get ans;
+        // as ncr = nc(n-r) we can choose either of above two;
+        // ncr = n * n-1 * ... n-r-1 / r * r-1 * r-2 ... 1
+        int N = m+n-2;
+        int r = m-1;
+        double res = 1;
+        for(int i=1; i<=r ; i++)
+            res = res * (N-r+i)/i;
+        return (int) res;
+    }
     
 };
