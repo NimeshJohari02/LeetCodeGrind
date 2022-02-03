@@ -24,7 +24,6 @@ public:
         for(auto&i1:nums3){
             for(auto&i2 : nums4){
                 int need = -(i1+i2);
-                if(m1.find(need) != m1.end())
                     ans+=m1[need];
             }
         }
