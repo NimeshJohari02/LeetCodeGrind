@@ -67,7 +67,7 @@ public:
                 isEndWordPresent=true;
         if(!isEndWordPresent) return 0;
         Trie trie;
-        for(auto it:wordList)
+        for(auto &it:wordList)
             trie.insert(it);
         unordered_map<string , bool > mp;
         queue<string>q;
@@ -80,7 +80,7 @@ public:
             int curr = q.size();
             while(curr--){
                 string front = q.front();
-                cout<<front<<"  \n";
+                //cout<<front<<"  \n";
                 q.pop();
                 for(int i=0 ; i < n ; i++){
                     string temp = front;
