@@ -35,15 +35,11 @@ public:
         DSU dsu(n);
         int extraEdges =0 ;
         for(auto &it : conn){
-            if(dsu.findParent(it[0]) == dsu.findParent(it[1]))
-                extraEdges++;
-            else 
+            if(dsu.findParent(it[0]) != dsu.findParent(it[1]))
                 dsu.unionSize(it[0] , it[1]);
         }
-        
         if(conn.size() < n-1) return  -1 ;
-
-         int ans = 0;
+        int ans = 0;
         for (int i = 0; i < n; i++)
             if (dsu.parent[i] == i)
                 ans++;
