@@ -19,11 +19,25 @@ public:
         }
         return dp[i][j]=ans ;
     }
+    int tabulation(int n , int arr[]){
+        vector<vector<int>>dp(n+1 , vector<int>(n+1 , 0));
+        for(int i=n-1 ; i>=1 ; i--){
+            for(int j = i+1 ; j <=n-1 ; j++){
+                int ans = INT_MAX;
+             for(int k = i ; k <= j-1 ; k++){
+            int steps = (arr[i-1] * arr[k] * arr[j]) + dp[i][k] + dp[k+1][j];
+            ans = min(ans , steps);
+            }
+            dp[i][j] = ans;
+            }
+        }
+        return dp[1][n-1];
+    }
     int matrixMultiplication(int n, int arr[])
     {
-        vector<vector<int>>dp( n+1 , vector<int>(n+1 , -1));
-        return rec(1 , n-1 , arr ,dp);
-        
+        // vector<vector<int>>dp( n+1 , vector<int>(n+1 , -1));
+        // return rec(1 , n-1 , arr ,dp);
+        return tabulation(n , arr);
     }
 };
 
