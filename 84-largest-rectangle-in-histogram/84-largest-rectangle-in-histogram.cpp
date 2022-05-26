@@ -28,8 +28,31 @@ public:
   for (int i = 0; i < n; i++)
     ans = max(ans, (nsr[i] - nsl[i] + 1) * arr[i]);
   return ans;
+
+    }
+    
+int singlePass(vector<int> &arr) {
+  stack<int> stk;
+  int maxA = 0;
+  int n = arr.size();
+  for (int i = 0; i <= n; i++) {
+    while (!stk.empty() && (i == n || arr[stk.top()] >= arr[i])) {
+      int height = arr[stk.top()];
+      stk.pop();
+      int width = 0;
+      if (stk.empty())
+        width = i;
+      else
+        width = i - stk.top() - 1;
+      maxA = max(maxA, width * height);
+    }
+    stk.push(i);
+  }
+  return maxA;
 }
+
+    
     int largestRectangleArea(vector<int>& heights) {
-        return area(heights);
+        return singlePass(heights);
     }
 };
