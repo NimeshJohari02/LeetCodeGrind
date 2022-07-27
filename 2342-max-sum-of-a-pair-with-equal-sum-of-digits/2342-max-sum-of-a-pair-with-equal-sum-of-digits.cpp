@@ -9,7 +9,6 @@ public:
         return ans;
     }
     int maximumSum(vector<int>& nums) {
-        unordered_map<int , int> mp;
         priority_queue<pair<int , int>> pq ;
         for(auto it : nums){
             int sum_of_digit = sum(it); 
@@ -33,3 +32,21 @@ public:
         return ans==INT_MIN ? -1 : ans;
     }
 };
+/*
+int maximumSum(vector<int>& nums) {
+    in this the max we could take is 10^5  ie when we have all 9's the sum would be 9 *9 = 81 thus take 82 to prevent overflow . 
+    int res = -1, d_n[82] = {}; // 9 * 9
+    for (int n : nums) {
+        int d = 0;
+        for (int nn = n; nn; nn /= 10)
+            d += nn % 10;
+        if (d_n[d])
+            res = max(res, d_n[d] + n);
+        d_n[d] = max(d_n[d], n);
+    }
+    return res;
+}
+
+
+
+*/
