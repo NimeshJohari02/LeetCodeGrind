@@ -11,16 +11,18 @@ public:
         return -1 ;
     }
     int search(vector<int>& arr, int target) {
-           int start = 0 , end = arr.size()-1 ;
-        while(end>start){
+           int start = 0 , end = arr.size()-1 , minIdx = arr.size() , minElement = INT_MAX;
+        while(end>=start){
             int mid = (start+end)>>1 ;
+            if(arr[mid]<minElement){
+                minIdx = mid ;
+                minElement = arr[mid];
+            }
             if(arr[mid]>=arr[end])start = mid+1;
-            else end = mid;
+            else end = mid-1;
         }
-        cout<<start<<" \n";
-        int pivot = start ;
+        int pivot = minIdx ;
         int left  =  binarySearch(arr , target , 0 , pivot-1);
-        cout<<"lEFT ==>"<< left;
         if(left != -1)return left;
         return binarySearch(arr , target , pivot , arr.size()-1);
     }
