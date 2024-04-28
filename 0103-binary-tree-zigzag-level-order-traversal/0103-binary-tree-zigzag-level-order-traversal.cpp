@@ -15,20 +15,19 @@ public:
         if(root == nullptr)return {};
         queue<TreeNode*> q;
         q.push(root);
-        bool flag = false;
+        bool flag = true;
         vector<vector<int>>ans ;
         while(!q.empty()){
             int n = q.size();
-            vector<int>miniAns;
+            vector<int>miniAns(n , 0);
             for(int i=0 ; i < n ; i++){
                 auto node = q.front();
                 q.pop();
-                miniAns.push_back(node->val);
+                // miniAns.push_back(node->val);
+                int idx = flag ? i : n-i-1;
+                miniAns[idx]= node->val;
                 if(node->left)q.push(node->left);
                 if(node->right)q.push(node->right);
-            }
-            if(flag){
-                reverse(miniAns.begin(), miniAns.end());
             }
             ans.push_back(miniAns);
             flag = !flag ;
