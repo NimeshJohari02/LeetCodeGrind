@@ -1,69 +1,58 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-
-//Method 1 Using Lvel Order ;
-// Method 2 Using A Post Order Traversal With 2 Variables Keeping Track Of Currret Level and Max 
-
-class Solution {
+#include <bits/stdc++.h>
+using namespace std;
+class TreeNode
+{
 public:
-/*    vector<vector<int>>levelOrder;
-    void getLevelOrder(TreeNode *root){
-        queue<TreeNode *> q;
-        q.push(root);
-        vector<int>smallAns;
-        while(!q.empty()){
-            int k = q.size();
-            for(int j=0;j<k;j++){
-                TreeNode *frontNode = q.front();
-                q.pop();
-                smallAns.push_back(frontNode->val);
-                if(frontNode->left){q.push(frontNode->left);}
-                if(frontNode->right){q.push(frontNode->right);}
-            }
-            levelOrder.push_back(smallAns);
-            smallAns.clear();
-        }
-        return;
-    }*/
-    vector<int>ans;
-    int maxLevel=0;
-    void traversal(TreeNode *root , int currentLevel=1)
+    int data;
+    TreeNode *left, *right;
+    TreeNode(int val)
     {
-        if(root == NULL){
-            return;
-        }
-        if(currentLevel>maxLevel){
-            ans.push_back(root->val);
-            maxLevel=currentLevel;
-        }
-        traversal(root->right,currentLevel+1);
-        traversal(root->left,currentLevel+1);
-        return ;
-    }
-        vector<int> rightSideView(TreeNode* root) {
-  /*      vector<int>ans;
-        if(root == NULL){
-            return {};
-        }
-        getLevelOrder(root);
-        for(auto it : levelOrder){
-            ans.push_back(it.back());
-        }
-        return ans ;
-    */
-            if(root==NULL){
-                return {};
-            }
-            traversal(root);
-            return ans;
+        this->data = val;
+        this->left = nullptr;
+        this->right = nullptr;
     }
 };
+class Solution
+{
+public:
+    void DFS(TreeNode *root, vector<int> &ans, int currHeight)
+    {
+        if (root == nullptr)
+            return;
+        if (currHeight == ans.size())
+        {
+            ans.push_back(root->data);
+        }
+        DFS(root->right, ans, currHeight + 1);
+        DFS(root->left, ans, currHeight + 1);
+        return;
+    }
+    vector<int> rightView(TreeNode *root)
+    {
+        if (root == nullptr)
+            return {};
+        vector<int> ans;
+        int currentHt = 0;
+        DFS(root, ans, currentHt);
+        return ans;
+    }
+};
+int main()
+{
+    TreeNode *root = new TreeNode(1);
+    root->left = new TreeNode(2);
+    root->right = new TreeNode(7);
+    root->left->left = new TreeNode(3);
+    root->left->left->right = new TreeNode(4);
+    root->left->left->right->left = new TreeNode(5);
+    root->left->left->right->right = new TreeNode(6);
+    root->right->right = new TreeNode(8);
+    root->right->right->left = new TreeNode(9);
+    root->right->right->left->left = new TreeNode(10);
+    root->right->right->left->right = new TreeNode(11);
+    Solution *s1 = new Solution();
+    auto ans1 = s1->rightView(root);
+    for (auto &it : ans1)
+        cout << it << " ";
+    return 0;
+}
