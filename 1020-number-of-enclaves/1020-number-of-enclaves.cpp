@@ -38,7 +38,7 @@ public:
         return countOnes-connectedNodes;
     }
     int numEnclaves(vector<vector<int>>& grid) {
-        return numberOfEnclavesDFS(grid);
+        // return numberOfEnclavesDFS(grid); // Runtime Poor
         // Same can be done using dfs
         int n = grid.size() ; 
         int m =grid[0].size();
