@@ -22,7 +22,6 @@ public:
         // If boundary 1 then subtract that from ans and for all subsequent nodes visited keep var as connectedNodes ;
         // ans = countOnes-connectedNode ;
         int countOnes = 0 , connectedNodes = 0;
-        queue<pair<int ,int>>q;
         for(int i=0 ; i < n ; i++){
             for(int j =0 ; j<m ;j++){
                 if(grid[i][j]==1)countOnes++ ;
